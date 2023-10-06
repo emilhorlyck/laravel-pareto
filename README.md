@@ -1,8 +1,8 @@
 # Opinionated fast-tracking of laravel development
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/ehorlyck/laravel-pareto.svg?style=flat-square)](https://packagist.org/packages/ehorlyck/laravel-pareto)
-[![Tests](https://img.shields.io/github/actions/workflow/status/ehorlyck/laravel-pareto/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/ehorlyck/laravel-pareto/actions/workflows/run-tests.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/ehorlyck/laravel-pareto.svg?style=flat-square)](https://packagist.org/packages/ehorlyck/laravel-pareto)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/emilhorlyck/laravel-pareto.svg?style=flat-square)](https://packagist.org/packages/emilhorlyck/laravel-pareto)
+[![Tests](https://img.shields.io/github/actions/workflow/status/emilhorlyck/laravel-pareto/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/emilhorlyck/laravel-pareto/actions/workflows/run-tests.yml)
+[![Total Downloads](https://img.shields.io/packagist/dt/emilhorlyck/laravel-pareto.svg?style=flat-square)](https://packagist.org/packages/emilhorlyck/laravel-pareto)
 
 
 
@@ -11,7 +11,7 @@
 You can install the package via composer:
 
 ```bash
-composer require ehorlyck/laravel-pareto
+composer require emilhorlyck/laravel-pareto
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Emil Hørlyck](https://github.com/eHorlyck)
+- [Emil Hørlyck](https://github.com/emilHorlyck)
 - [All Contributors](../../contributors)
 
 ## License

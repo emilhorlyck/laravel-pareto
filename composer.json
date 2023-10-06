@@ -1,11 +1,11 @@
 {
-    "name": "ehorlyck/laravel-pareto",
+    "name": "emilhorlyck/laravel-pareto",
     "description": "Opinionated fast-tracking of laravel development",
     "keywords": [
-        "eHorlyck",
+        "emilHorlyck",
         "laravel-pareto"
     ],
-    "homepage": "https://github.com/ehorlyck/laravel-pareto",
+    "homepage": "https://github.com/emilhorlyck/laravel-pareto",
     "license": "MIT",
     "authors": [
         {
@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "EHorlyck\\LaravelPareto\\": "src"
+            "EmilHorlyck\\LaravelPareto\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "EHorlyck\\LaravelPareto\\Tests\\": "tests"
+            "EmilHorlyck\\LaravelPareto\\Tests\\": "tests"
         }
     },
     "scripts": {
