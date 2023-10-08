@@ -3,6 +3,7 @@
 namespace EmilHorlyck\LaravelPareto;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use EmilHorlyck\LaravelPareto\Commands\TestCommand;
 
 class ServiceProvider extends BaseServiceProvider
 {
