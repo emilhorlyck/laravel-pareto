@@ -12,6 +12,6 @@ class TestCommand extends Command
 
     public function handle(): int
     {
-        this->info('Test command');
+        $this->info('Test command');
     }
 }
