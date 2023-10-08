@@ -12,7 +12,6 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register(): void
     {
-        $this->app->register(ServiceProvider::class);
     }
 
     /**
