@@ -12,8 +12,6 @@ class ServiceProvider extends BaseServiceProvider
     public function register(): void
     {
         $this->app->register(ServiceProvider::class);
-
-        dd('hej');
     }
 
     /**
@@ -26,7 +24,5 @@ class ServiceProvider extends BaseServiceProvider
                 TestCommand::class
             ]);
         }
-
-        dd('hej');
     }
 }

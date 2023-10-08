@@ -21,7 +21,8 @@
         "pestphp/pest": "^2.0",
         "laravel/pint": "^v1.13.2",
         "spatie/ray": "^1.28",
-        "illuminate/support": "^9.21|^10.0"
+        "illuminate/support": "^9.21|^10.0",
+        "illuminate/console": "^v9.21|^v10.0"
     },
     "autoload": {
         "psr-4": {

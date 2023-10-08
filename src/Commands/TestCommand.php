@@ -1,6 +1,6 @@
 <?php
 
-namespace EmilHorlyck\LaravelPareto;
+namespace EmilHorlyck\LaravelPareto\Commands;
 
 use Illuminate\Console\Command;
 
