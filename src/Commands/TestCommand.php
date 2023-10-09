@@ -1,6 +1,6 @@
 <?php
 
-namespace EmilHorlyck\LaravelPareto;
+namespace EmilHorlyck\LaravelPareto\Commands;
 
 use Illuminate\Console\Command;
 
@@ -12,6 +12,6 @@ class TestCommand extends Command
 
     public function handle(): int
     {
-        this->info('Test command');
+        $this->info('Test command');
     }
 }
