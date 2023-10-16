@@ -8,7 +8,7 @@ test('invokable actions')
     ->expect('App\Actions')
     ->toBeInvokable();
 
-test('models extend eloquent') 
+test('models extend eloquent')
     ->expect('App\Models')
     ->toExtend('Illuminate\Database\Eloquent\Model');
 
