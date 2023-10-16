@@ -31,7 +31,7 @@ class InitCommand extends Command
         // - [ ] Conventional commit script
         // - [ ] Release script
         // - [ ] Pre push git hook for pest
-        // - [ ] Run tests
+        // - [ ] Add tests
         // - [x] Fillament Admin panel
 
         $initSteps = [
@@ -43,7 +43,7 @@ class InitCommand extends Command
             // 'conventional-commits' => 'Conventional commit script',
             // 'release' => 'Release script',
             // 'pre-push' => 'Pre push git hook for pest',
-            // 'tests' => 'Run tests',
+            'tests' => 'Add tests',
             'admin' => 'Fillament Admin panel',
         ];
 
@@ -316,10 +316,13 @@ class InitCommand extends Command
             info('Fillament installed successfully. go to /admin to see the admin panel.');
         }
 
-        // Run tests
+        // Add tests
         if ($chosenSteps->contains('tests')) {
+            $this->info('Adding tests...');
+            exec('php artisan vendor:publish --tag=Laravel-pareto-tests');
+            $this->info('Tests added successfully.');
             exec('./vendor/bin/pest --init');
-            exec('./vendor/bin/pest');
+            // exec('./vendor/bin/pest');
         }
 
         return self::SUCCESS;

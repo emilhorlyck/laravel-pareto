@@ -24,5 +24,9 @@ class ServiceProvider extends BaseServiceProvider
                 InitCommand::class,
             ]);
         }
+
+        $this->publishes([
+            __DIR__.'/../tests/ArchTest.php' => config_path('../tests/Feature/Pareto/ArchTest.php'),
+        ], 'Laravel-pareto-tests');
     }
 }
