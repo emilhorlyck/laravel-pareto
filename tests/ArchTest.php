@@ -4,44 +4,40 @@ it('will not use debugging functions')
     ->expect(['dd', 'dump', 'ray'])
     ->not->toBeUsed();
 
-test('app')
+test('invokable actions')
     ->expect('App\Actions')
     ->toBeInvokable();
 
-test('app')
+test('models extend eloquent') 
     ->expect('App\Models')
     ->toExtend('Illuminate\Database\Eloquent\Model');
 
-test('app')
+test('jobs implement should queue')
     ->expect('App\Jobs')
     ->toImplement('Illuminate\Contracts\Queue\ShouldQueue');
 
 // Suffixes
 
-test('app')
+test('controllers end with controller')
     ->expect('App\Http\Controllers')
     ->toHaveSuffix('Controller');
 
-test('app')
+test('jobs end with job')
     ->expect('App\Jobs')
     ->toHaveSuffix('Job');
 
-test('app')
+test('clients end with client')
     ->expect('App\Http\Clients')
     ->toHaveSuffix('Client');
 
-test('app')
+test('factories end with factory')
     ->expect('App\databases\factories')
     ->toHaveSuffix('Factory');
 
-test('app')
+test('seeders end with seeder')
     ->expect('App\database\seeders')
     ->toHaveSuffix('Seeder');
 
-test('app')
-    ->expect('App\Http\Controllers')
-    ->toHaveSuffix('Controller');
-
-test('app')
+test('providers end with provider')
     ->expect('App\Providers')
     ->toHaveSuffix('Provider');
