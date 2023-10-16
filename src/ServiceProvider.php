@@ -2,8 +2,8 @@
 
 namespace EmilHorlyck\LaravelPareto;
 
-use EmilHorlyck\LaravelPareto\Commands\TestCommand;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use EmilHorlyck\LaravelPareto\Commands\InitCommand;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -21,7 +21,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                TestCommand::class,
+                InitCommand::class
             ]);
         }
     }

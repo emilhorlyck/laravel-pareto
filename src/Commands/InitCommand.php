@@ -14,7 +14,7 @@ use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\password;
 use function Laravel\Prompts\text;
 
-class ParetoInitCommand extends Command
+class InitCommand extends Command
 {
     public $signature = 'pareto:init';
 
@@ -24,9 +24,10 @@ class ParetoInitCommand extends Command
     {
         // - [x] Install blueprint
         // - [ ] Setup backup
-        // - [ ] API Documentation
+        // - [x] API Documentation
         // - [x] Generate ERD
-        // - [ ] Readme
+        // - [x] Readme
+        // - [ ] Activity log for models
         // - [ ] Conventional commit script
         // - [ ] Release script
         // - [ ] Pre push git hook for pest
@@ -34,11 +35,11 @@ class ParetoInitCommand extends Command
         // - [x] Fillament Admin panel
 
         $initSteps = [
+            'readme' => 'Replace readme',
             'blueprint' => 'Install blueprint',
             // 'backup' => 'Setup backup',
             'api-docs' => 'API Documentation',
             'erd' => 'Generate ERD',
-            // 'readme' => 'Readme',
             // 'conventional-commits' => 'Conventional commit script',
             // 'release' => 'Release script',
             // 'pre-push' => 'Pre push git hook for pest',
@@ -54,9 +55,116 @@ class ParetoInitCommand extends Command
             )
         );
 
+        if ($chosenSteps->isEmpty()) {
+            info('You must choose at least one step to continue.');
+
+            return self::FAILURE;
+
+        } else {
+            $this->addTooReadme([
+                '## Packages installed using [Laravel-Pareto](https://github.com/emilhorlyck/laravel-pareto)',
+            ]);
+        }
+
+        if ($chosenSteps->contains('readme')) {
+            $this->info('Replacing readme...');
+            exec('rm README.md');
+            exec('touch README.md');
+
+            $gitAuthor = text('what is you gitHub handle');
+            $githubUrl = text('What is the repo url?');
+
+            $this->addTooReadme([
+
+                '![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)',
+                '',
+                '',
+                '# Project Title',
+                '',
+                'A brief description of what this project does and who it is used for',
+                '',
+                '',
+                '## Tech Stack',
+                '',
+                '**TALL:** Tailwind, Alpine.js, Laravel, and Livewire',
+                '',
+                '## Demo',
+                '',
+                'Insert gif or link to demo',
+                '',
+                '',
+                '## Run Locally',
+                '',
+                'Clone the project',
+                '',
+                '\`\`\`bash',
+                'git clone '.$githubUrl,
+                '\`\`\`',
+                '',
+                'Go to the project directory',
+                '',
+                '\`\`\`bash',
+                'cd my-project',
+                '\`\`\`',
+                '',
+                'Install dependencies',
+                '',
+                '\`\`\`bash',
+                'composer install',
+                '\`\`\`',
+                '',
+                'Start the server',
+                '',
+                '\`\`\`bash',
+                'php artisan serve',
+                '\`\`\`',
+                '',
+                '',
+                '## Running Tests',
+                '',
+                'To run tests, run the following command',
+                '',
+                '\`\`\`bash',
+                'php artisan vendor/bin/pest',
+                '\`\`\`',
+                '',
+                '',
+                '## Deployment',
+                '',
+                'To deploy this project push the code to github and make a PR against develop',
+                '',
+                '',
+                '## Authors ',
+                '',
+                '- [@'.$gitAuthor.'](https://www.github.com/'.$gitAuthor.')',
+                '',
+                '## CodeOwner',
+                '',
+                '- [@'.$gitAuthor.'](https://www.github.com/'.$gitAuthor.')',
+                '',
+                '',
+                '## Related',
+                '',
+                'Here are some related projects',
+                '',
+                '## Links',
+                '',
+                '',
+                '## Maintenance',
+                '',
+                'Maintenance windows are agreed to be:',
+                'No windows agreed.',
+            ]);
+
+            $this->info('Readme created succesfully');
+        }
+
         // TODO: extract to action
         // Blueprint installation
         if ($chosenSteps->contains('blueprint')) {
+
+            // $this->addTooReadme('echo "### [Blueprint](Blueprint) from function');
+
             info('Installing blueprint...');
             exec('composer require --dev laravel-shift/blueprint');
             info('   - enabling test assertions...');
@@ -66,11 +174,8 @@ class ParetoInitCommand extends Command
             exec('echo "/draft.yaml" >> .gitignore');
             exec('echo "/.blueprint" >> .gitignore');
             info('blueprint installed successfully.');
-        }
 
-        // Blueprint definition
-        if ($chosenSteps->contains('blueprint')) {
-
+            // Blueprint definition
             info('Creating draft.yaml...');
             exec('touch draft.yaml');
 
@@ -101,11 +206,25 @@ class ParetoInitCommand extends Command
 
             if (confirm(
                 label: 'do you want to a Migrate:fresh?')) {
-
                 //Todo: ask if we should seed the database
-
                 exec('php artisan migrate:fresh');
             }
+
+            $this->addTooReadme([
+                '### [Blueprint](https://blueprint.laravelshift.com/docs/generating-components/)',
+                '#### Usage',
+                '',
+                'Build the application from the draft.yaml file using the following command:',
+                '\`\`\`bash',
+                'php artisan blueprint:build',
+                '\`\`\`',
+                '',
+                'Undo the last blueprint build using the following command:',
+                '\`\`\`bash',
+                'php artisan blueprint:erase',
+                '\`\`\`',
+                '',
+            ]);
         }
 
         // Backup installation
@@ -132,11 +251,25 @@ class ParetoInitCommand extends Command
             exec('open generated_erd.png');
 
             info('ERD generated successfully.');
-        }
 
-        // Readme
-        if ($chosenSteps->contains('readme')) {
-            info('Creating readme.md...');
+            $this->addTooReadme([
+                '### [Generate ERD](exampl.com)',
+                '#### Usage',
+                '',
+                'Generate an ERD',
+                '\`\`\`bash',
+                'php artisan generate:erd',
+                '\`\`\`',
+            ]);
+
+            $this->addTooReadme([
+                '## Generated ERD',
+                '![ERD](generated_erd.png)',
+                'To update the ERD in the Readme run the following command',
+                '\`\`\`bash',
+                'php artisan generate:erd generated_erd.png',
+                '\`\`\`',
+            ]);
         }
 
         // Conventional commit script
@@ -224,5 +357,12 @@ class ParetoInitCommand extends Command
         });
 
         return $modelsNames; //$models->values();
+    }
+
+    public function addTooReadme(array $lines)
+    {
+        foreach ($lines as $line) {
+            exec('echo "'.$line.'" >> README.md');
+        }
     }
 }
