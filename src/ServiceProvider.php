@@ -26,7 +26,7 @@ class ServiceProvider extends BaseServiceProvider
         }
 
         $this->publishes([
-            __DIR__.'/../tests/ArchTest.php' => config_path('../tests/Feature/Pareto/ArchTest.php'),
+            __DIR__.'/Resources/ArchTest.php' => config_path('../tests/Feature/Pareto/ArchTest.php'),
         ], 'Laravel-pareto-tests');
     }
 }
