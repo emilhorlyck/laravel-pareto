@@ -274,7 +274,7 @@ class InitCommand extends Command
         }
 
         // Activity log for models
-        if($chosenSteps->contains('activity-log')) {
+        if ($chosenSteps->contains('activity-log')) {
             $this->info('Installing activity log...');
             exec('composer require spatie/laravel-activitylog');
             info('activity log installed successfully.');
