@@ -22,11 +22,11 @@ class InitCommand extends Command
 
     public function handle(): int
     {
+        // - [x] Readme
         // - [x] Install blueprint
         // - [ ] Setup backup
         // - [x] API Documentation
         // - [x] Generate ERD
-        // - [x] Readme
         // - [ ] Activity log for models
         // - [ ] Conventional commit script
         // - [ ] Release script
@@ -40,6 +40,7 @@ class InitCommand extends Command
             // 'backup' => 'Setup backup',
             'api-docs' => 'API Documentation',
             'erd' => 'Generate ERD',
+            'activity-log' => 'Activity log for models',
             // 'conventional-commits' => 'Conventional commit script',
             // 'release' => 'Release script',
             // 'pre-push' => 'Pre push git hook for pest',
@@ -269,6 +270,32 @@ class InitCommand extends Command
                 '\`\`\`bash',
                 'php artisan generate:erd generated_erd.png',
                 '\`\`\`',
+            ]);
+        }
+
+        // Activity log for models
+        if ($chosenSteps->contains('activity-log')) {
+            $this->info('Installing activity log...');
+            exec('composer require spatie/laravel-activitylog');
+            info('activity log installed successfully.');
+            exec('php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="activitylog-migrations"');
+            exec('php artisan migrate');
+            info('activity log migrations migrated successfully.');
+
+            $this->addTooReadme([
+                '### [laravel-activitylog](https://spatie.be/docs/laravel-activitylog/v4/basic-usage/logging-activity)',
+                '#### Usage',
+                '',
+                'Log an activity',
+                '\`\`\`php',
+                'activity()->log(\'Look, I logged something\');',
+                '\`\`\`',
+
+                'The package can automatically log events such as when a model is created, updated and deleted.',
+                'To make this work all you need to do is let your model use the Spatie\Activitylog\Traits\LogsActivity-trait.',
+                '',
+                '[Logging model events](https://spatie.be/docs/laravel-activitylog/v4/advanced-usage/logging-model-events)',
+                '',
             ]);
         }
 
