@@ -27,6 +27,7 @@ class InitCommand extends Command
         // - [ ] Setup backup
         // - [x] API Documentation
         // - [x] Generate ERD
+        // - [ ] Excel seeder
         // - [ ] Activity log for models
         // - [ ] Conventional commit script
         // - [ ] Release script
@@ -40,6 +41,7 @@ class InitCommand extends Command
             // 'backup' => 'Setup backup',
             'api-docs' => 'API Documentation',
             'erd' => 'Generate ERD',
+            'excel-seeder' => 'Excel seeder',
             'activity-log' => 'Activity log for models',
             // 'conventional-commits' => 'Conventional commit script',
             // 'release' => 'Release script',
@@ -271,6 +273,59 @@ class InitCommand extends Command
                 'php artisan generate:erd generated_erd.png',
                 '\`\`\`',
             ]);
+        }
+
+        // Excel seeder
+        if ($chosenSteps->contains('excel-seeder')) {
+            $this->info('Installing excel seeder...');
+            exec('composer require --dev bfinlay/laravel-excel-seeder');
+            info('excel seeder installed successfully.');
+
+            $this->addTooReadme([
+                '### [Excel seeder](https://github.com/bfinlay/laravel-excel-seeder)',
+                '#### Usage',
+                '',
+                'Just add the SpreadsheetSeeder to be called in your /database/seeder/DatabaseSeeder.php',
+
+                '\`\`\`php',
+                'use Illuminate\Database\Seeder;',
+                'use bfinlay\SpreadsheetSeeder\SpreadsheetSeeder;',
+
+                'class DatabaseSeeder extends Seeder',
+                '{',
+                '    public function run()',
+                '    {',
+                '        $this->call([',
+                '            SpreadsheetSeeder::class,',
+                '        ]);',
+                '    }',
+                '}',
+                '\`\`\`',
+                '',
+                'Place your spreadsheets into the path /database/seeders/ of your Laravel project.',
+
+                'With the default settings, the seeder makes certain assumptions about the XLSX files:',
+                '* worksheet (tab) names match --> table names in database',
+                '* worksheet (tab) has a header row and the column names match --> table column names in database',
+                '* If there is only one worksheet in the XLSX workbook either the worksheet (tab) name or workbook filename must match a table in the database. ',
+                '',
+                '',
+                'An Excel example:',
+                '',
+                '| first_name    | last_name     | birthday   |',
+                '| ------------- | ------------- | ---------- |',
+                '| Foo           | Bar           | 1970-01-01 |',
+                '| John          | Doe           | 1980-01-01 |',
+                '',
+                'A CSV example:',
+                '\`\`\`',
+                '    first_name,last_name,birthday',
+                '    Foo,Bar,1970-01-01',
+                '    John,Doe,1980-01-01',
+                '\`\`\`',
+
+            ]);
+
         }
 
         // Activity log for models
